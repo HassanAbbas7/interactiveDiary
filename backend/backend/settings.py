@@ -25,7 +25,6 @@ SECRET_KEY = 'django-insecure-*u4@2u*lr+xw6cf7=9-w$7c($9a4(p9fy79$cvmvn-=r3r64jl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'api',
     'rest_framework',
     'rest_framework.authtoken',
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -90,8 +91,25 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+ALLOWED_HOSTS = ['*']
+
+# CORS_ORIGIN_WHITELIST = ['http://localhost:5173', "http://localhost:5173"]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ALLOW_HEADERS = [
+#     "refresh",
+#     "content-type",
+#     "authorization",
+#     "Access-Control-Allow-Origin",
+#     'x-csrftoken',
+# ]
+
+CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
+                      'content-type', 'accept', 'origin', 'authorization', 'Access-Control-Allow-Headers', 'mode', 'x-csrftoken')
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:5173/']
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

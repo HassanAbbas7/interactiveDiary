@@ -23,3 +23,23 @@ class Diary(models.Model):
     title = models.CharField(max_length=100)
     date = models.DateField()
     content = models.TextField()
+
+class Question(models.Model):
+    title = models.CharField(max_length=100)
+    options = models.ManyToManyField("Option", related_name="linked_question")
+    is_next_question = models.BooleanField(default=False)
+    def __str__(self):
+        return self.title
+
+    def is_next_q(self):
+        return self.linked_option.exists()
+
+class Option(models.Model):
+    title = models.CharField(max_length=100)
+    text = models.TextField()
+    next_question = models.ForeignKey("Question", on_delete=models.SET_NULL, null=True, blank=True, db_constraint=False, related_name="linked_option")
+
+    def __str__(self):
+        return self.title
+
+

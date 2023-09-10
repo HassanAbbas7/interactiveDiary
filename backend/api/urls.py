@@ -6,10 +6,12 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
     path('testing/', views.Test.as_view()),
-    path('get-diaries/', views.DiaryList.as_view())
+    path('get-diaries/', views.DiaryList.as_view()),
+    path('questions/', views.QuestionList.as_view()),
 ]
 
 router = DefaultRouter()
 router.register('user', views.UserViewSet, basename='user')
 router.register('diary-entry', views.DiaryEntry, basename='diary-entry')
+router.register('question', views.QuestionViewSet, basename='question')
 urlpatterns += router.urls

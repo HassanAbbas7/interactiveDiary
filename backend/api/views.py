@@ -35,7 +35,31 @@ class UserViewSet(viewsets.ModelViewSet):
 class Test(APIView):
     permission_classes = (AllowAny,)
     def get(self, request):
-        return Response("hi")
+        questions = Question.objects.all()
+        data = QuestionSerializer(questions, many=True).data
+        return Response(data)
+
+# model view set to get all questions
+class QuestionList(APIView):
+    permission_classes = (AllowAny,)
+    def get(self, request):
+        questions = Question.objects.filter(is_next_question=False)
+        for question in questions:
+            question.is_next_question = question.is_next_q()
+            question.save()
+
+        serializer = QuestionSerializer(questions, many=True)
+        return Response(serializer.data)
+    
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    permission_classes = (AllowAny,)
+    serializer_class = QuestionSerializer
+    queryset = Question.objects.all()
+
+    
+
+
 
 # an apiview to get total number of diary entries of the user
 class DiaryCount(APIView):

@@ -14,3 +14,14 @@ class DiarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Diary
         fields = "__all__"
+
+class OptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Option
+        fields = "__all__"
+
+class QuestionSerializer(serializers.ModelSerializer):
+    options = OptionSerializer(many=True)
+    class Meta:
+        model = Question
+        fields = "__all__"
