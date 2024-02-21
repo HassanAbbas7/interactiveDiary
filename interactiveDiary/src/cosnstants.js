@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 
-const BASE_URL = `http://localhost:8000`
+// const BASE_URL = `http://localhost:8000`
+const BASE_URL = `https://roomgptbackend.pythonanywhere.com`
 
 const GET_QUESTIONS = `${BASE_URL}/questions/`
 const GET_QUESTION = `${BASE_URL}/question/`
@@ -20,6 +21,11 @@ export const getQuestions = async () => {
 
 
 export const getQuestion = async (id)=>{
-    const question = await axios.get(GET_QUESTION+id+"/")
-    return question.data
+    try{
+        const question = await axios.get(GET_QUESTION+id+"/")
+        return question.data
+    }
+    catch{
+        return null
+    }
 }
