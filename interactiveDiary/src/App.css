@@ -12,6 +12,13 @@
   margin: auto;
 }
 
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ensure the container takes the full height of its parent */
+}
+
 .btn-option{
   height: 25%;
   width: 50%;
